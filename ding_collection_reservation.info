@@ -3,3 +3,5 @@ description = Collection handling
 version = 0.1
 core = 7.x
 package = Ding!
+
+files[] = ding_collection_reservation.test
