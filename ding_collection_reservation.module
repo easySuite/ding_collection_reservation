@@ -4,23 +4,9 @@
  */
 
 /**
- * Implements hook_init()
- */
-function ding_collection_reservation_init() {
-
-  //Load drupal ajax library
-  if (arg(0) === 'search') {
-    drupal_add_library('system', 'drupal.ajax');
-  }
-}
-
-/**
- * Implements hook_menu()
- *
- * @return array of menu items
+ * Implements hook_menu().
  */
 function ding_collection_reservation_menu() {
-
   $items['ting/collection/%ting_collection/popup/nojs'] = array(
     'page callback' => 'ding_collection_reservation_ajax',
     'page arguments' => array(4, 2),
@@ -38,14 +24,9 @@ function ding_collection_reservation_menu() {
 /**
  * Implements hook_form_FORM_ID_alter().
  *
- * @param $form array
- * @param $form_state array
- * @param $form_id string contain form id
- *
  * Add configuration to admin reservable settings form
  */
 function ding_collection_reservation_form_ting_admin_reservable_settings_alter(&$form, &$form_state, $form_id) {
-
   //Add check box for reservable collections
   $form['ting_reservable']['ting_reservable_collections'] = array(
     '#type'          => 'checkboxes',
@@ -88,9 +69,7 @@ function ding_collection_reservation_ajax($type, TingCollection $collection) {
 }
 
 /**
- * Implements hook_theme()
- *
- * @return array theme configuration
+ * Implements hook_theme().
  */
 function ding_collection_reservation_theme() {
   return array(
