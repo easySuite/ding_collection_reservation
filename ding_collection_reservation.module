@@ -3,3 +3,101 @@
  * @file Code handle collections features
  */
 
+/**
+ * Implements hook_init()
+ */
+function ding_collection_reservation_init() {
+
+  //Load drupal ajax library
+  if (arg(0) === 'search') {
+    drupal_add_library('system', 'drupal.ajax');
+  }
+}
+
+/**
+ * Implements hook_menu()
+ *
+ * @return array of menu items
+ */
+function ding_collection_reservation_menu() {
+
+  $items['ting/collection/%ting_collection/popup/nojs'] = array(
+    'page callback' => 'ding_collection_reservation_ajax',
+    'page arguments' => array(4, 2),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['ting/collection/%ting_collection/popup/ajax'] = array(
+      'delivery callback' => 'ajax_deliver',
+    ) + $items['ting/collection/%ting_collection/popup/nojs'];
+
+  return $items;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * @param $form array
+ * @param $form_state array
+ * @param $form_id string contain form id
+ *
+ * Add configuration to admin reservable settings form
+ */
+function ding_collection_reservation_form_ting_admin_reservable_settings_alter(&$form, &$form_state, $form_id) {
+
+  //Add check box for reservable collections
+  $form['ting_reservable']['ting_reservable_collections'] = array(
+    '#type'          => 'checkboxes',
+    '#title'         => t('Collections'),
+    '#options'       => drupal_map_assoc(array(t('Yes, show a Reserve-button on collections.'))),
+    '#default_value' => variable_get('ting_reservable_collections', array()),
+    '#weight'        => -1
+  );
+}
+
+/**
+ * Menu entry callback.
+ *
+ * @param TingCollection $collection
+ *   Ting collection.
+ * @param $type
+ *   Type of callback.
+ *
+ * @return
+ *   Array of ajax commands.
+ */
+function ding_collection_reservation_ajax($type, TingCollection $collection) {
+  $commands = array();
+  $ajax = ($type == 'ajax');
+
+  if ($ajax) {
+    $view = ting_collection_view($collection, 'popup');
+    $output = render($view);
+    $commands[] = ajax_command_ding_popup('collection_reservation', t('Reserve'), $output);
+  }
+  else {
+    // Simple redirect with anchor. Better solution is needed here.
+    drupal_goto('ting/collection/' . $collection->id, array('fragment' => 'collection_items'));
+  }
+
+  return array(
+    '#type' => 'ajax',
+    '#commands' => $commands
+  );
+}
+
+/**
+ * Implements hook_theme()
+ *
+ * @return array theme configuration
+ */
+function ding_collection_reservation_theme() {
+  return array(
+    'ting_object' => array(
+      'template' => 'ting_object',
+      'render element' => 'elements',
+      'file' => 'ding_collection_reservation.theme.inc',
+    ),
+  );
+}
