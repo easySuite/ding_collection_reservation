@@ -56,6 +56,7 @@ function ding_collection_reservation_ajax($type, TingCollection $collection) {
     $view = ting_collection_view($collection, 'popup');
     $output = render($view);
     $commands[] = ajax_command_ding_popup('collection_reservation', t('Reserve'), $output);
+    drupal_add_js(drupal_get_path('module', 'ding_collection_reservation') . '/js/ding_collection_reservation.js', 'file');
   }
   else {
     // Simple redirect with anchor. Better solution is needed here.
