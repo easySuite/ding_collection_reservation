@@ -38,6 +38,16 @@ function ding_collection_reservation_form_ting_admin_reservable_settings_alter(&
 }
 
 /**
+ * Implements hook_js_alter().
+ */
+function ding_collection_reservation_js_alter(&$javascript) {
+  $ding_availability_js = $javascript['sites/easyddb.loc/modules/ding_availability/js/ding_availability.js'];
+  if (arg(3) === 'popup' && arg(4) === 'ajax' && isset($ding_availability_js)) {
+    unset($javascript['sites/easyddb.loc/modules/ding_availability/js/ding_availability.js']);
+  }
+}
+
+/**
  * Menu entry callback.
  *
  * @param TingCollection $collection
