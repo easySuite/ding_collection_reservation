@@ -63,8 +63,18 @@ function ding_collection_reservation_ajax($type, TingCollection $collection) {
   $ajax = ($type == 'ajax');
 
   if ($ajax) {
-    $view = ting_collection_view($collection, 'popup');
-    $output = render($view);
+    $output = '';
+    foreach ($collection->reply->objects as $ting_object) {
+      $reservable = ding_availability_items(array($ting_object->localId));
+      $full_ting_object = ding_entity_load($ting_object->id);
+      $ac_source = $full_ting_object->getAc_source();
+      if ($ac_source !== 'Bibliotekskatalog' || $reservable[$ting_object->localId]['reservable'] == FALSE){
+        continue;
+      }
+      $view = ting_object_view($full_ting_object, 'popup');
+      $output .= render($view);
+    }
+
     $commands[] = ajax_command_ding_popup('collection_reservation', t('Reserve'), $output);
     drupal_add_js(drupal_get_path('module', 'ding_collection_reservation') . '/js/ding_collection_reservation.js', 'file');
   }
