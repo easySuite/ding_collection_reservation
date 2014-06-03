@@ -20,12 +20,13 @@ function ding_collection_reservation_preprocess_ting_object(&$variables) {
           'btn',
           'reservation',
           'collection',
+          'reservable',
         ),
       ),
     );
     $variables['elements']['ting_primary_object'][0]['ding_entity_buttons'] = array(
       '#markup' => l(t('Reserve'), $link, $attributes),
-      '#prefix' => '<div class="field-type-ding-entity-buttons"><div class="reservation-link-ajax">',
+      '#prefix' => '<div class="field-type-ding-entity-buttons field-name-ding-entity-buttons"><div class="reservation-link-ajax">',
       '#suffix' => '</div></div><span id="collection_items"></span>',
       '#weight' => 100,
     );
