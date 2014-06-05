@@ -62,8 +62,21 @@ function ding_collection_reservation_ajax($type, TingCollection $collection) {
   $commands = array();
   $ajax = ($type == 'ajax');
 
+  // Remove all entities that are not library items.
+  foreach ($collection->reply->objects as $k=>$entity) {
+    if ($entity->record['ac:source'][''][0] != 'Bibliotekskatalog') {
+      unset($collection->reply->objects[$k]);
+    }
+  }
+
+  // If there is only one item that can eb reserved
+  // we should reserve it on the fly.
+  if (count($collection->getEntities()) == 1) {
+    return ding_reservation_reserve_ajax(reset($collection->getEntities()));
+  }
+
   if ($ajax) {
-    $view = ting_collection_view($collection, 'popup');
+    $view = ting_collection_view($collection, 'collection_popup');
     $output = render($view);
     $commands[] = ajax_command_ding_popup('collection_reservation', t('Reserve'), $output);
     drupal_add_js(drupal_get_path('module', 'ding_collection_reservation') . '/js/ding_collection_reservation.js', 'file');
@@ -77,6 +90,28 @@ function ding_collection_reservation_ajax($type, TingCollection $collection) {
     '#type' => 'ajax',
     '#commands' => $commands
   );
+}
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function ding_collection_reservation_entity_info_alter(&$entity_info) {
+  if (!isset($entity_info['ting_object']['view modes']['objects_in_popup'])) {
+    $entity_info['ting_object']['view modes'] += array(
+      'objects_in_popup' => array(
+        'label' => t('List of objects in popup'),
+        'custom settings' => TRUE,
+      )
+    );
+  }
+  if (!isset($entity_info['ting_collection']['view modes']['collection_popup'])) {
+    $entity_info['ting_collection']['view modes'] += array(
+      'collection_popup' => array(
+        'label' => t('Collection popup'),
+        'custom settings' => TRUE,
+      )
+    );
+  }
 }
 
 /**
