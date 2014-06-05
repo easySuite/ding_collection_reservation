@@ -2,7 +2,7 @@
 /**
  * @file Code handle collections features
  */
-
+include_once 'ding_collection_reservation.features.inc';
 /**
  * Implements hook_menu().
  */
