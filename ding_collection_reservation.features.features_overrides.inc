@@ -32,25 +32,28 @@ function ding_collection_reservation_features_override_default_overrides() {
     'label' => 'above',
     'settings' => array(),
     'type' => 'hidden',
-    'weight' => 0,
+    'weight' => 18,
   );
   $overrides["field_instance.ting_object-ting_object-ding_entity_buttons.display|objects_in_popup"] = array(
     'label' => 'hidden',
     'module' => 'ding_entity',
     'settings' => array(),
     'type' => 'ding_entity_buttons_ajax',
-    'weight' => 2,
+    'weight' => 3,
   );
   $overrides["field_instance.ting_object-ting_object-ting_author.display|objects_in_popup"] = array(
     'label' => 'hidden',
     'module' => 'ting',
     'settings' => array(),
     'type' => 'ting_author_default',
-    'weight' => 1,
+    'weight' => 2,
   );
   $overrides["field_instance.ting_object-ting_object-ting_cover.display|objects_in_popup"] = array(
     'label' => 'hidden',
-    'module' => 'ting_covers',
+    'module' => 'ting_covers_plus',
+    'settings' => array(
+      'image_style' => 'medium',
+    ),
     'type' => 'ting_cover_default',
     'weight' => 0,
   );
@@ -58,7 +61,7 @@ function ding_collection_reservation_features_override_default_overrides() {
     'label' => 'above',
     'settings' => array(),
     'type' => 'hidden',
-    'weight' => 0,
+    'weight' => 39,
   );
   $overrides["field_instance.ting_object-ting_object-ting_title.display|objects_in_popup"] = array(
     'label' => 'hidden',
@@ -68,8 +71,8 @@ function ding_collection_reservation_features_override_default_overrides() {
       'prefix_type' => 'no',
     ),
     'type' => 'ting_title_default',
-    'weight' => 0,
+    'weight' => 1,
   );
 
-  return $overrides;
+ return $overrides;
 }

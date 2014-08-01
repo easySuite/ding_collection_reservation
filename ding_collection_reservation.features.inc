@@ -7,8 +7,7 @@
 /**
  * Implements hook_ctools_plugin_api().
  */
-function ding_collection_reservation_ctools_plugin_api() {
-  list($module, $api) = func_get_args();
+function ding_collection_reservation_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "field_group" && $api == "field_group") {
     return array("version" => "1");
   }
@@ -43,7 +42,7 @@ function ding_collection_reservation_field_default_field_instances_alter(&$data)
       'label' => 'above',
       'settings' => array(),
       'type' => 'hidden',
-      'weight' => 0,
+      'weight' => 18,
     ); /* WAS: '' */
   }
   if (isset($data['ting_object-ting_object-ding_entity_buttons'])) {
@@ -52,7 +51,7 @@ function ding_collection_reservation_field_default_field_instances_alter(&$data)
       'module' => 'ding_entity',
       'settings' => array(),
       'type' => 'ding_entity_buttons_ajax',
-      'weight' => 2,
+      'weight' => 3,
     ); /* WAS: '' */
   }
   if (isset($data['ting_object-ting_object-ting_author'])) {
@@ -61,13 +60,16 @@ function ding_collection_reservation_field_default_field_instances_alter(&$data)
       'module' => 'ting',
       'settings' => array(),
       'type' => 'ting_author_default',
-      'weight' => 1,
+      'weight' => 2,
     ); /* WAS: '' */
   }
   if (isset($data['ting_object-ting_object-ting_cover'])) {
     $data['ting_object-ting_object-ting_cover']['display']['objects_in_popup'] = array(
       'label' => 'hidden',
-      'module' => 'ting_covers',
+      'module' => 'ting_covers_plus',
+      'settings' => array(
+        'image_style' => 'medium',
+      ),
       'type' => 'ting_cover_default',
       'weight' => 0,
     ); /* WAS: '' */
@@ -77,7 +79,7 @@ function ding_collection_reservation_field_default_field_instances_alter(&$data)
       'label' => 'above',
       'settings' => array(),
       'type' => 'hidden',
-      'weight' => 0,
+      'weight' => 39,
     ); /* WAS: '' */
   }
   if (isset($data['ting_object-ting_object-ting_title'])) {
@@ -89,7 +91,7 @@ function ding_collection_reservation_field_default_field_instances_alter(&$data)
         'prefix_type' => 'no',
       ),
       'type' => 'ting_title_default',
-      'weight' => 0,
+      'weight' => 1,
     ); /* WAS: '' */
   }
 }
