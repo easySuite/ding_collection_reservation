@@ -21,7 +21,7 @@ function ding_collection_reservation_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Left Column',
-    'weight' => '3',
+    'weight' => '1',
     'children' => array(
       0 => 'ting_cover',
     ),
@@ -52,11 +52,12 @@ function ding_collection_reservation_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Right Column',
-    'weight' => '6',
+    'weight' => '2',
     'children' => array(
       0 => 'ding_entity_buttons',
       1 => 'ting_title',
-      2 => 'ting_author',
+      2 => 'ting_type',
+      3 => 'ting_author',
     ),
     'format_type' => 'div',
     'format_settings' => array(
