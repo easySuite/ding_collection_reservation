@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Search results reservation button feature.
- */
-
-include_once 'search_results_reservation_button.features.inc';
