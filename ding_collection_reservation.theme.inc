@@ -20,7 +20,6 @@ function ding_collection_reservation_preprocess_ting_object(&$variables) {
           'btn',
           'reservation',
           'collection',
-          'reservable',
         ),
       ),
     );
