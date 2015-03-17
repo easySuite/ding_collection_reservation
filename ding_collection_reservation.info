@@ -1,6 +1,6 @@
 name = Ding collection reservation
-description = Collection handling
+description = Handle reservation of collection items.
 core = 7.x
 package = easyDDB
 version = 7.x-1.0.1
-
+dependencies[] = field_group

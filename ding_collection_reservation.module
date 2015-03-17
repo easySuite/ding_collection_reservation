@@ -91,7 +91,7 @@ function ding_collection_reservation_ajax($type, TingCollection $collection) {
 
   return array(
     '#type' => 'ajax',
-    '#commands' => $commands
+    '#commands' => $commands,
   );
 }
 
@@ -104,7 +104,7 @@ function ding_collection_reservation_entity_info_alter(&$entity_info) {
       'objects_in_popup' => array(
         'label' => t('List of objects in popup'),
         'custom settings' => TRUE,
-      )
+      ),
     );
   }
   if (!isset($entity_info['ting_collection']['view modes']['collection_popup'])) {
@@ -112,7 +112,7 @@ function ding_collection_reservation_entity_info_alter(&$entity_info) {
       'collection_popup' => array(
         'label' => t('Collection popup'),
         'custom settings' => TRUE,
-      )
+      ),
     );
   }
 }
