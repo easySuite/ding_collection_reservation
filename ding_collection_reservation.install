@@ -98,7 +98,7 @@ function ding_collection_reservation_install() {
     'settings' => array(
       'image_style' => 'medium'
     ),
-    'module' => 'ting_covers',
+    'module' => 'ting_covers_plus',
   );
   field_update_instance($instance);
 
