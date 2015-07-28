@@ -3,15 +3,15 @@
 # LANGUAGE translation of Drupal (general)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  ding_collection_reservation.theme.inc: n/a
-#  ding_collection_reservation.module: n/a
-#  ding_collection_reservation.info: n/a
+#  profiles/ding2/modules/ding_collection_reservation/ding_collection_reservation.theme.inc: n/a
+#  profiles/ding2/modules/ding_collection_reservation/ding_collection_reservation.module: n/a
+#  profiles/ding2/modules/ding_collection_reservation/ding_collection_reservation.info: n/a
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-02-19 16:14+0100\n"
+"POT-Creation-Date: 2015-07-28 11:17+0300\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -20,35 +20,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ding_collection_reservation.theme.inc:27 ding_collection_reservation.module:84
+#: profiles/ding2/modules/ding_collection_reservation/ding_collection_reservation.theme.inc:27 profiles/ding2/modules/ding_collection_reservation/ding_collection_reservation.module:84
 msgid "Reserve"
 msgstr ""
 
-#: ding_collection_reservation.module:33
+#: profiles/ding2/modules/ding_collection_reservation/ding_collection_reservation.module:33
 msgid "Collections"
 msgstr ""
 
-#: ding_collection_reservation.module:34
+#: profiles/ding2/modules/ding_collection_reservation/ding_collection_reservation.module:34
 msgid "Yes, show a Reserve-button on collections."
 msgstr ""
 
-#: ding_collection_reservation.module:105
+#: profiles/ding2/modules/ding_collection_reservation/ding_collection_reservation.module:105
 msgid "List of objects in popup"
 msgstr ""
 
-#: ding_collection_reservation.module:113
+#: profiles/ding2/modules/ding_collection_reservation/ding_collection_reservation.module:113
 msgid "Collection popup"
 msgstr ""
 
-#: ding_collection_reservation.info:0
+#: profiles/ding2/modules/ding_collection_reservation/ding_collection_reservation.info:0
 msgid "Ding collection reservation"
 msgstr ""
 
-#: ding_collection_reservation.info:0
-msgid "Collection handling"
+#: profiles/ding2/modules/ding_collection_reservation/ding_collection_reservation.info:0
+msgid "Handle reservation of collection items."
 msgstr ""
 
-#: ding_collection_reservation.info:0
+#: profiles/ding2/modules/ding_collection_reservation/ding_collection_reservation.info:0
 msgid "easyDDB"
 msgstr ""
 
