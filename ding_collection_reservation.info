@@ -1,7 +1,7 @@
 name = Ding collection reservation
 description = Handle reservation of collection items.
 core = 7.x
-package = easyDDB
+package = easyOPAC
 version = 7.x-2.4.4+easy
 dependencies[] = easyddb_search_result_reservation
 dependencies[] = ding_search_collection
