@@ -11,5 +11,5 @@ Go to @/admin/config/ting/reservable page and select "Yes, show a Reserve-button
 to enable "Reserve" button for collection items.
 
 ## Usage:
-When user clicks on reserve button on collection item, will be shown a popup wit available items
+When user clicks on reserve button on collection item, will be shown a popup with available items
 from this collection.
