@@ -42,8 +42,12 @@ function ding_collection_reservation_form_ting_admin_reservable_settings_alter(&
  */
 function ding_collection_reservation_js_alter(&$javascript) {
   $ding_availability_js = drupal_get_path('module', 'ding_availability') . '/js/ding_availability.js';
-  if (arg(3) === 'popup' && arg(4) === 'ajax' && isset($javascript[$ding_availability_js])) {
+  $args = arg();
+  if ($args[3] === 'popup' && $args[4] === 'ajax' && isset($javascript[$ding_availability_js])) {
     unset($javascript[$ding_availability_js]);
+  }
+  elseif ($args[0] == 'search' && $args[1] == 'ting') {
+    drupal_add_js(drupal_get_path('module', 'ding_collection_reservation') . '/js/ding_collection_reservation.js', 'file');
   }
 }
 

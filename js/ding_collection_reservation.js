@@ -2,17 +2,26 @@
  * @file Handle show of reserve buttons in popup
  */
 (function($) {
-  $(document).on('dialogopen', function(event, ui) {
-    var reserve_buttons_ids = [];
+  'use strict';
+  Drupal.behaviors.ding_collection_reservation = {
+    attach: function(context, settings) {
+      let observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function (mutation) {
+          if (mutation.attributeName === "class" && $(mutation.target).hasClass('popupbar-is-open')) {
+            $('#popupbar-collection_reservation').find('.reserve-button').each(function() {
+              let local_id = $(this).attr('id').split(':')[1];
+              if (Drupal.DADB[local_id].reservable) {
+                $(this).addClass('reservable');
+              }
+            });
+          }
+        })
+      });
 
-    $('.ding-popup-content .reserve-button').each(function() {
-      reserve_buttons_ids.push($(this).attr('id').split(':'));
-    });
-
-    $.each(reserve_buttons_ids, function(id, content_id) {
-      if (Drupal.DADB[content_id[1]].reservable) {
-        $('.field-type-ding-entity-buttons a.reserve-button[id$="' + content_id[1] + '"]').addClass('reservable');
+      let $body = $("body", context);
+      if ($body[0]) {
+        observer.observe($body[0], {attributes: true});
       }
-    });
-  });
+    }
+  };
 })(jQuery);
