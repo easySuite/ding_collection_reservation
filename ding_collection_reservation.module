@@ -48,6 +48,7 @@ function ding_collection_reservation_js_alter(&$javascript) {
   }
   elseif ($args[0] == 'search' && $args[1] == 'ting') {
     drupal_add_js(drupal_get_path('module', 'ding_collection_reservation') . '/js/ding_collection_reservation.js', 'file');
+    drupal_add_css(drupal_get_path('module', 'ding_collection_reservation') . '/css/ding_collection_reservation.css', 'file');
   }
 }
 

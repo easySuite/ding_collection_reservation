@@ -161,4 +161,6 @@ function ding_collection_reservation_disable() {
     $group_object  = field_group_load_field_group($group, 'ting_object', 'ting_object', 'objects_in_popup');
     field_group_group_export_delete($group_object);
   }
+
+  variable_del('ting_reservable_collections');
 }
