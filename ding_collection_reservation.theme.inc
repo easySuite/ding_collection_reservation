@@ -34,4 +34,14 @@ function ding_collection_reservation_preprocess_ting_object(&$variables) {
     // Load drupal ajax library for ding_popup
     drupal_add_library('system', 'drupal.ajax');
   }
+  elseif ($multiple) {
+    $buttons = &$variables['elements']['ting_primary_object'][0]['ding_entity_buttons'][0];
+    foreach ($buttons as &$button) {
+      // TODO: Get a proper way to find Reservation button.
+      $found = preg_match('/(Res)/', $button['#text']);
+      if (!empty($button['#text']) && $found) {
+        $button['#options']['attributes']['class'][] = 'collection-hidden';
+      }
+    }
+  }
 }
