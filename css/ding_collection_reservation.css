@@ -8,7 +8,7 @@
   margin: 0;
   padding-top: 5px;
 }
-#popupbar-collection_reservation .ting-object-right .field-type-ding-entity-buttons .action-button {
+#popupbar-collection_reservation .ting-object-right .field-type-ding-entity-buttons a {
   padding: 10px;
 }
 .popupbar .popupbar-content {
