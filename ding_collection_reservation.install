@@ -24,7 +24,7 @@ function _ding_collection_reservation_add_fields() {
     'type' => 'ting_cover_default',
     'weight' => '1',
     'settings' => array(
-      'image_style' => 'medium'
+      'image_style' => 'ding_list_medium'
     ),
     'module' => 'ting_covers',
   );
