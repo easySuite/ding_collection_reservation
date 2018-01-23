@@ -1,0 +1,19 @@
+.ting-collection-wrapper .action-button.reserve-button.collection-hidden {
+  display: none;
+}
+#popupbar-collection_reservation .ting-object-left {
+  width: 7%;
+}
+#popupbar-collection_reservation .ting-object-right .field-type-ding-entity-buttons {
+  margin: 0;
+  padding-top: 5px;
+}
+#popupbar-collection_reservation .ting-object-right .field-type-ding-entity-buttons a {
+  padding: 10px;
+}
+.popupbar .popupbar-content {
+  display: none;
+}
+.popupbar .popupbar-content.selected {
+  display: block;
+}

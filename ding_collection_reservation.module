@@ -42,8 +42,13 @@ function ding_collection_reservation_form_ting_admin_reservable_settings_alter(&
  */
 function ding_collection_reservation_js_alter(&$javascript) {
   $ding_availability_js = drupal_get_path('module', 'ding_availability') . '/js/ding_availability.js';
-  if (arg(3) === 'popup' && arg(4) === 'ajax' && isset($javascript[$ding_availability_js])) {
+  $args = arg();
+  if ((!empty($args[3]) && $args[3] === 'popup') && (!empty($args[4]) && $args[4] === 'ajax') && isset($javascript[$ding_availability_js])) {
     unset($javascript[$ding_availability_js]);
+  }
+  elseif ($args[0] == 'search' && $args[1] == 'ting') {
+    drupal_add_js(drupal_get_path('module', 'ding_collection_reservation') . '/js/ding_collection_reservation.js', 'file');
+    drupal_add_css(drupal_get_path('module', 'ding_collection_reservation') . '/css/ding_collection_reservation.css', 'file');
   }
 }
 
@@ -61,16 +66,6 @@ function ding_collection_reservation_js_alter(&$javascript) {
 function ding_collection_reservation_ajax($type, TingCollection $collection) {
   $commands = array();
   $ajax = ($type == 'ajax');
-
- $online_types = array_filter(variable_get('ting_online_types', _ting_default_online_types()));
-
-  // Remove all entities that are not library items.
-  foreach ($collection->reply->objects as $k=>$entity) {
-    // Show only items in popup of a specific type and that are NOT online materials.
-    if ($entity->record['ac:source'][''][0] != 'Bibliotekskatalog' || in_array(strtolower($entity->record['dc:type']['dkdcplus:BibDK-Type'][0]), $online_types)) {
-      unset($collection->reply->objects[$k]);
-    }
-  }
 
   // If there is only one item that can eb reserved
   // we should reserve it on the fly.
@@ -128,4 +123,18 @@ function ding_collection_reservation_theme() {
       'file' => 'ding_collection_reservation.theme.inc',
     ),
   );
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function ding_collection_reservation_theme_registry_alter(&$theme_registry) {
+  $path = drupal_get_path('module', 'ding_collection_reservation');
+  $template_file_objects = drupal_find_theme_templates($theme_registry, '.tpl.php', $path);
+  $theme_registry['ting_object__view_mode__objects_in_popup']['path'] = $path . '/templates';
+  $theme_registry['ting_object__view_mode__objects_in_popup'] = array_merge(
+    $theme_registry['ting_object__view_mode__objects_in_popup'],
+    $template_file_objects['ting_object__view_mode__objects_in_popup']
+  );
+  $theme_registry['ting_object__view_mode__objects_in_popup']['type'] = 'module';
 }
