@@ -178,8 +178,8 @@ function _ding_collection_reservation_update_entity_buttons() {
       'view_mode' => 'search_result'
     )
   );
-  $goup = $group_content = $groups['ting_object']['ting_object']['search_result'];
-  $group_info_weight = $goup['group_info']->weight;
+  $group = $group_content = $groups['ting_object']['ting_object']['search_result'];
+  $group_info_weight = $group['group_info']->weight;
   $data = db_query('SELECT data FROM {field_config_instance} WHERE field_name = :field_name AND bundle = :bundle', array(':field_name' => 'ding_entity_buttons', ':bundle' => 'ting_object'))->fetchField();
   $data = unserialize($data);
   $data['display']['search_result']['weight'] = $group_info_weight + 1;
