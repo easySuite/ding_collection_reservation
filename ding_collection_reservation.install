@@ -9,6 +9,7 @@
  */
 function ding_collection_reservation_enable() {
   _ding_collection_reservation_add_fields();
+  _ding_collection_reservation_update_entity_buttons();
 }
 
 /**
@@ -164,3 +165,4 @@ function ding_collection_reservation_disable() {
 
   variable_del('ting_reservable_collections');
 }
+
