@@ -5,9 +5,6 @@
  */
 
 include_once 'ding_collection_reservation.features.inc';
-/**
- * @file Code handle collections features
- */
 
 /**
  * Implements hook_menu().
