@@ -1,7 +1,10 @@
 <?php
 /**
- * @file Code handle collections features
+ * @file
+ * Code for the Ding collection reservation feature.
  */
+
+include_once 'ding_collection_reservation.features.inc';
 
 /**
  * Implements hook_menu().
