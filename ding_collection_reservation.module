@@ -44,10 +44,10 @@ function ding_collection_reservation_form_ting_admin_reservable_settings_alter(&
  * Implements hook_js_alter().
  */
 function ding_collection_reservation_js_alter(&$javascript) {
-  $ding_availability_js = drupal_get_path('module', 'ding_reservation') . '/js/ding_reservation_reservability.js';
+  $ding_reservability_js = drupal_get_path('module', 'ding_reservation') . '/js/ding_reservation_reservability.js';
   $args = arg();
-  if ((!empty($args[3]) && $args[3] === 'popup') && (!empty($args[4]) && $args[4] === 'ajax') && isset($javascript[$ding_availability_js])) {
-    unset($javascript[$ding_availability_js]);
+  if ((!empty($args[3]) && $args[3] === 'popup') && (!empty($args[4]) && $args[4] === 'ajax') && isset($javascript[$ding_reservability_js])) {
+    unset($javascript[$ding_reservability_js]);
   }
   elseif ($args[0] == 'search' && $args[1] == 'ting') {
     drupal_add_js(drupal_get_path('module', 'ding_collection_reservation') . '/js/ding_collection_reservation.js', 'file');
