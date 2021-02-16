@@ -8,30 +8,53 @@
  * Implements template_preprocess_ting_object(&$variables).
  */
 function ding_collection_reservation_preprocess_ting_object(&$variables) {
-  // Add button to each collection
-  $multiple = (count($variables['elements']['#object']->ting_entities['und']) > 1);
+  // Add button to each collection.
+  $multiple = (is_array($variables['elements']['#object']->ting_entities['und']) && count($variables['elements']['#object']->ting_entities['und']) > 1);
+  $variables['elements']['#attached']['js'][] = drupal_get_path('module', 'ding_collection_reservation') . '/js/ding_collection_reservation.js';
   if ($variables['elements']['#view_mode'] == 'teaser' && variable_get('ting_reservable_collections', FALSE) && $multiple) {
+    $items = [];
+    $local_id = NULL;
+    if ($variables['elements']['#object'] instanceof TingCollection) {
+      $collection = $variables['elements']['#object'];
+      $entities = $collection->getEntities();
+
+      /** @var \TingEntity $entity */
+      foreach ($entities as $key => $entity) {
+        $items[] = $entity->getLocalId();
+      }
+
+      $primaryObject = $collection->getPrimary_object();
+      $local_id = $primaryObject->getLocalId();
+    }
+
+    $variables['attributes_array']['ting-collection-items'] = drupal_json_encode($items);
     $link = 'ting/collection/' . $variables['elements']['#object']->ding_entity_id . '/popup/nojs';
-    $attributes = array(
-      'attributes' => array(
-        'class' => array(
+    $attributes = [
+      'attributes' => [
+        'class' => [
           'use-ajax',
           'reserve-button',
           'btn',
           'reservation',
           'collection',
           'action-button',
-        ),
-      ),
-    );
-    $variables['elements']['ting_primary_object'][0]['ding_entity_buttons'] = array(
+          'js-check-collection-reservability',
+        ],
+      ],
+    ];
+
+    if (!empty($local_id)) {
+      $attributes['attributes']['data-local-id'] = $local_id;
+    }
+
+    $variables['elements']['ting_primary_object'][0]['ding_entity_buttons'] = [
       '#markup' => l(t('Reserve'), $link, $attributes),
       '#prefix' => '<div class="field-type-ding-entity-buttons field-name-ding-entity-buttons"><div class="reservation-link-ajax">',
       '#suffix' => '</div></div><span id="collection_items"></span>',
       '#weight' => 100,
-    );
+    ];
 
-    // Load drupal ajax library for ding_popup
+    // Load drupal ajax library for ding_popup.
     drupal_add_library('system', 'drupal.ajax');
   }
   elseif ($multiple) {
