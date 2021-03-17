@@ -73,7 +73,8 @@ function ding_collection_reservation_ajax($type, TingCollection $collection) {
   // If there is only one item that can eb reserved
   // we should reserve it on the fly.
   if (count($collection->getEntities()) == 1) {
-    return ding_reservation_reserve_ajax(reset($collection->getEntities()));
+    $entities = $collection->getEntities();
+    return ding_reservation_reserve_ajax(reset($entities));
   }
 
   if ($ajax) {

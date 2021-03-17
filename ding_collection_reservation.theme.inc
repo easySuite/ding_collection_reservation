@@ -8,10 +8,11 @@
  * Implements template_preprocess_ting_object(&$variables).
  */
 function ding_collection_reservation_preprocess_ting_object(&$variables) {
+  $ting_entities = $variables['elements']['#object']->ting_entities;
   // Add button to each collection.
-  $multiple = (is_array($variables['elements']['#object']->ting_entities['und']) && count($variables['elements']['#object']->ting_entities['und']) > 1);
+  $multiple = ($ting_entities && is_array($ting_entities[LANGUAGE_NONE]) && count($ting_entities[LANGUAGE_NONE]) > 1);
   $variables['elements']['#attached']['js'][] = drupal_get_path('module', 'ding_collection_reservation') . '/js/ding_collection_reservation.js';
-  if ($variables['elements']['#view_mode'] == 'teaser' && variable_get('ting_reservable_collections', FALSE) && $multiple) {
+  if ($variables['elements']['#view_mode'] == 'teaser' && $multiple && variable_get('ting_reservable_collections', FALSE)) {
     $items = [];
     $local_id = NULL;
     if ($variables['elements']['#object'] instanceof TingCollection) {
@@ -57,7 +58,7 @@ function ding_collection_reservation_preprocess_ting_object(&$variables) {
     // Load drupal ajax library for ding_popup.
     drupal_add_library('system', 'drupal.ajax');
   }
-  elseif ($multiple) {
+  elseif ($multiple && isset($variables['elements']['ting_primary_object'][0]['ding_entity_buttons'])) {
     $buttons = &$variables['elements']['ting_primary_object'][0]['ding_entity_buttons'][0];
     foreach ($buttons as &$button) {
       // TODO: Get a proper way to find Reservation button.
